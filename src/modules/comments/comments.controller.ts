@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Query,
+  HttpCode,
 } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -58,18 +59,17 @@ export class CommentsController {
     return this.commentsService.findCommentsByPostId(postId, limit);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commentsService.findOne(+id);
+  @Patch(':commentId')
+  update(
+    @Param('commentId') commentId: string,
+    @Body() updateCommentDto: UpdateCommentDto,
+  ) {
+    return this.commentsService.updateComment(commentId, updateCommentDto);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
-    return this.commentsService.update(+id, updateCommentDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentsService.remove(+id);
+  @Delete(':commentId')
+  @HttpCode(204)
+  remove(@Param('commentId') commentId: string) {
+    return this.commentsService.removeComment(commentId);
   }
 }

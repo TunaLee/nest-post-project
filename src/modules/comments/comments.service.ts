@@ -118,11 +118,35 @@ export class CommentsService {
     return `This action returns a #${id} comment`;
   }
 
-  update(id: number, updateCommentDto: UpdateCommentDto) {
-    return `This action updates a #${id} comment`;
+  async updateComment(commentId: string, updateCommentDto: UpdateCommentDto) {
+    // const comment = await this.commentRepository.findOne({
+    //   where: { id: commentId },
+    // });
+    // if (!comment) {
+    //   throw new NotFoundException('해당하는 댓글이 없습니다.');
+    // }
+    // comment.content = updateCommentDto.content;
+    // return await this.commentRepository.save(comment);
+
+    const result = await this.commentRepository.update(commentId, {
+      content: updateCommentDto.content,
+    });
+
+    if (result.affected === 0) {
+      throw new NotFoundException('해당하는 댓글이 없습니다.');
+    }
+    return result;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} comment`;
+  async removeComment(commentId: string) {
+    const comment = await this.commentRepository.findOne({
+      where: { id: commentId },
+      relations: ['post'],
+    });
+
+    if (!comment) {
+      throw new NotFoundException('해당하는 댓글이 없습니다.');
+    }
+    return await this.commentRepository.remove(comment);
   }
 }

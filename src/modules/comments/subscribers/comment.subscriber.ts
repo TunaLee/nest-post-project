@@ -2,6 +2,7 @@ import {
   EntitySubscriberInterface,
   EventSubscriber,
   InsertEvent,
+  RemoveEvent,
 } from 'typeorm';
 import { Comment } from '../entities/comment.entity';
 import { Post } from 'src/modules/posts/entities/post.entity';
@@ -12,11 +13,21 @@ export class CommentSubscriber implements EntitySubscriberInterface<Comment> {
     return Comment;
   }
 
-  async beforeInsert(event: InsertEvent<Comment>) {
+  async afterInsert(event: InsertEvent<Comment>) {
     const postRepository = event.manager.getRepository(Post);
 
     await postRepository.increment(
       { id: event.entity.post.id },
+      'commentCount',
+      1,
+    );
+  }
+
+  async afterRemove(event: RemoveEvent<Comment>) {
+    const postRepository = event.manager.getRepository(Post);
+    console.log(event.entity);
+    await postRepository.decrement(
+      { id: event.entity?.post.id },
       'commentCount',
       1,
     );
