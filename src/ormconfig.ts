@@ -5,6 +5,7 @@ import { DbConfigService } from './config/db/config.service';
 import { ConfigService } from '@nestjs/config';
 import { PostViewSubscriber } from './modules/posts/subscribers/post-view.subscriber';
 import { CommentSubscriber } from './modules/comments/subscribers/comment.subscriber';
+import { UserSubscriber } from './modules/users/subscribers/user.subscribe';
 
 const entities = [join(__dirname, '/**/*.entity{.ts,.js}')];
 const migrations = [join(__dirname, './migrations/**/*{.ts,.js}')];
@@ -22,5 +23,5 @@ export const AppDataSource = new DataSource({
   migrations,
   synchronize: false,
   logging: true,
-  subscribers: [PostViewSubscriber, CommentSubscriber],
+  subscribers: [PostViewSubscriber, CommentSubscriber, UserSubscriber],
 });

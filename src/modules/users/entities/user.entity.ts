@@ -3,6 +3,11 @@ import { Comment } from 'src/modules/comments/entities/comment.entity';
 import { Post } from 'src/modules/posts/entities/post.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
+export enum UserRole {
+  ADMIN = 'admin',
+  COMMON = 'common',
+}
+
 @Entity()
 export class User extends BaseEntity {
   @Column()
@@ -13,6 +18,9 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @Column({ enum: UserRole, default: UserRole.COMMON })
+  role: UserRole;
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];

@@ -25,11 +25,11 @@ export class CommentSubscriber implements EntitySubscriberInterface<Comment> {
 
   async afterRemove(event: RemoveEvent<Comment>) {
     const postRepository = event.manager.getRepository(Post);
-    console.log(event.entity);
+
     await postRepository.decrement(
       { id: event.entity?.post.id },
       'commentCount',
-      1,
+      1 + (event.entity?.replies.length || 0),
     );
   }
 }

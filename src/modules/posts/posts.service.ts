@@ -129,11 +129,11 @@ export class PostsService {
     return this.postRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
+  update(id: string, updatePostDto: UpdatePostDto) {
     return `This action updates a #${id} post`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} post`;
   }
 }

@@ -141,7 +141,7 @@ export class CommentsService {
   async removeComment(commentId: string) {
     const comment = await this.commentRepository.findOne({
       where: { id: commentId },
-      relations: ['post'],
+      relations: ['post', 'replies'],
     });
 
     if (!comment) {

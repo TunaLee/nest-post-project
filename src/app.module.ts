@@ -9,6 +9,7 @@ import { S3Module } from './modules/s3/s3.module';
 import { AppDataSource } from './ormconfig';
 import { PostsModule } from './modules/posts/posts.module';
 import { CommentsModule } from './modules/comments/comments.module';
+import { ImagesModule } from './modules/images/images.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CommentsModule } from './modules/comments/comments.module';
     S3Module,
     PostsModule,
     CommentsModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -18,7 +18,6 @@ export class AuthService {
     private s3Service: S3Service,
   ) {}
   async register(registerDto: RegisterDto): Promise<ResponseRegisterDto> {
-    registerDto.password = await encryptPassword(registerDto.password);
     return this.usersService.createUser(registerDto);
   }
 
@@ -102,7 +101,7 @@ export class AuthService {
     };
   }
 
-  uploadProfile(file: Express.Multer.File) {
-    return this.s3Service.uploadFile(file);
-  }
+  // uploadProfile(file: Express.Multer.File) {
+  //   return this.s3Service.uploadFile(file, 'user-profile');
+  // }
 }

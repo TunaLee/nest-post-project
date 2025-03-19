@@ -81,15 +81,15 @@ export class AuthController {
     });
   }
 
-  @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(JwtAuthGuard)
-  @Post('upload-profile')
-  async uploadProfile(
-    @UploadedFile() file: Express.Multer.File,
-    @RequestUser() user: User,
-  ) {
-    const result = await this.authService.uploadProfile(file);
+  // @UseInterceptors(FileInterceptor('file'))
+  // @UseGuards(JwtAuthGuard)
+  // @Post('upload-profile')
+  // async uploadProfile(
+  //   @UploadedFile() file: Express.Multer.File,
+  //   @RequestUser() user: User,
+  // ) {
+  //   const result = await this.authService.uploadProfile(file);
 
-    return { result };
-  }
+  //   return { result };
+  // }
 }

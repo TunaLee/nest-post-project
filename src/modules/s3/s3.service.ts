@@ -17,12 +17,12 @@ export class S3Service {
     });
   }
 
-  async uploadFile(file: Express.Multer.File) {
-    const fileName = Date.now();
+  async uploadFile(file: Express.Multer.File, dirPath: string) {
+    const fileName = `${dirPath}/${Date.now()}`;
 
     const uploadParams = {
       Bucket: this.awsConfigService.awsBucketName,
-      Key: fileName.toString(),
+      Key: fileName,
       Body: file.buffer,
       ContentType: file.mimetype,
     };

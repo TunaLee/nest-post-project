@@ -18,6 +18,7 @@ import { User } from '../users/entities/user.entity';
 import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UUID } from 'typeorm/driver/mongodb/bson.typings';
+import { CommentRoleGuard } from './guards/comment-role.guard';
 
 @Controller('posts/:postId/comments')
 @ApiTags('댓글 관리')
@@ -60,6 +61,7 @@ export class CommentsController {
   }
 
   @Patch(':commentId')
+  @UseGuards(CommentRoleGuard)
   update(
     @Param('commentId') commentId: string,
     @Body() updateCommentDto: UpdateCommentDto,
@@ -68,6 +70,7 @@ export class CommentsController {
   }
 
   @Delete(':commentId')
+  @UseGuards(CommentRoleGuard)
   @HttpCode(204)
   remove(@Param('commentId') commentId: string) {
     return this.commentsService.removeComment(commentId);
