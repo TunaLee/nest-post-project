@@ -8,6 +8,13 @@ export enum UserRole {
   COMMON = 'common',
 }
 
+export enum RegisterType {
+  GOOGLE = 'google',
+  NAVER = 'naver',
+  KAKAO = 'kakao',
+  COMMON = 'common',
+}
+
 @Entity()
 export class User extends BaseEntity {
   @Column()
@@ -16,8 +23,14 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   password: string;
+
+  @Column({ nullable: true })
+  socialId: string;
+
+  @Column({ enum: RegisterType, default: RegisterType.COMMON })
+  registerType: RegisterType;
 
   @Column({ enum: UserRole, default: UserRole.COMMON })
   role: UserRole;

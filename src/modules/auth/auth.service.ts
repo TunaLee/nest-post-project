@@ -29,13 +29,21 @@ export class AuthService {
         '이메일 또는 패스워드가 잘못 되었습니다.',
       );
 
+    return this.jwtTokenBuilder(logInDto.email, origin);
+  }
+
+  googleLogIn(email: string, origin: string) {
+    return this.jwtTokenBuilder(email, origin);
+  }
+
+  jwtTokenBuilder(email: string, origin: string) {
     const { accessToken, accessOptions } = this.setJwtAccessToken(
-      logInDto.email,
+      email,
       origin,
     );
 
     const { refreshToken, refreshOptions } = this.setJwtRefreshToken(
-      logInDto.email,
+      email,
       origin,
     );
 

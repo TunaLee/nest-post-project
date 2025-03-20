@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+  IsStrongPassword,
+} from 'class-validator';
+import { RegisterType } from 'src/modules/users/entities/user.entity';
 
 export class RegisterDto {
   @ApiProperty({ type: String })
@@ -13,9 +20,16 @@ export class RegisterDto {
     minLength: 8,
     minSymbols: 1,
   })
-  password: string;
+  @IsOptional()
+  password?: string;
 
   @ApiProperty({ type: String })
   @IsString()
   name: string;
+
+  @IsEnum(RegisterType)
+  registerType: RegisterType = RegisterType.COMMON;
+
+  @IsOptional()
+  socialId?: string;
 }
