@@ -6,7 +6,9 @@ phases:
       nodejs: 22
     commands:
       - echo "Installing dependencies..."
+      - npm install @nestjs/cli
       - npm install 
+      
 
   pre_build:
     commands:
