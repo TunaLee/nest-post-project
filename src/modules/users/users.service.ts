@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { RegisterType, User } from './entities/user.entity';
 import { RegisterDto } from '../auth/dto/register.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -30,5 +30,14 @@ export class UsersService {
         '이메일 또는 패스워드가 잘못 되었습니다.',
       );
     return user;
+  }
+
+  findUserBySocialId(socialId: string, registerType: RegisterType) {
+    return this.userRepository.findOne({
+      where: {
+        socialId,
+        registerType,
+      },
+    });
   }
 }

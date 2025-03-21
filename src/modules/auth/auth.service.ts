@@ -28,14 +28,19 @@ export class AuthService {
       throw new UnauthorizedException(
         '이메일 또는 패스워드가 잘못 되었습니다.',
       );
-
+    return this.makeJwtToken(logInDto.email, origin);
+  }
+  googleLogin(email: string, origin: string) {
+    return this.makeJwtToken(email, origin);
+  }
+  makeJwtToken(email: string, origin: string) {
     const { accessToken, accessOptions } = this.setJwtAccessToken(
-      logInDto.email,
+      email,
       origin,
     );
 
     const { refreshToken, refreshOptions } = this.setJwtRefreshToken(
-      logInDto.email,
+      email,
       origin,
     );
 
