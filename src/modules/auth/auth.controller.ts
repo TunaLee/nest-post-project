@@ -15,13 +15,12 @@ import { ResponseRegisterDto } from './dto/response-register.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LogInDto } from './dto/log-in.dto';
 import { RequestOrigin } from 'src/decorators/request-origin.decorator';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { User } from '../users/entities/user.entity';
 import { RequestUser } from 'src/decorators/request-user.decorator';
 import { GoogleAuthGuard } from './guards/google.guard';
-
 ApiTags('유저 인증');
 @Controller('auth')
 export class AuthController {
