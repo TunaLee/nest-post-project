@@ -9,10 +9,12 @@ import { AppConfigModule } from 'src/config/app/config.module';
 import { AppConfigService } from 'src/config/app/config.service';
 import { S3Module } from '../s3/s3.module';
 import { GoogleStrategy } from './strategies/google.strategy';
+import { SocialConfigModule } from 'src/config/social/config.module';
 
 @Module({
   imports: [
     AppConfigModule,
+    SocialConfigModule,
     UsersModule,
     S3Module,
     JwtModule.registerAsync({

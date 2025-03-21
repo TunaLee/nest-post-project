@@ -8,7 +8,6 @@ import {
   UploadedFile,
   UseGuards,
   Get,
-  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
@@ -21,9 +20,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { User } from '../users/entities/user.entity';
 import { RequestUser } from 'src/decorators/request-user.decorator';
-import { GoogleAuthGuard } from './guards/google-auth.guard';
-import { AuthGuard } from '@nestjs/passport';
-
+import { GoogleAuthGuard } from './guards/google.guard';
 ApiTags('유저 인증');
 @Controller('auth')
 export class AuthController {
@@ -74,18 +71,18 @@ export class AuthController {
   }
 
   @Get('signin/google')
-  @UseGuards(AuthGuard('google'))
-  googleLogIn(@Req() req: Request) {}
+  @UseGuards(GoogleAuthGuard)
+  googleLogIn() {}
 
   @Get('signin/google/callback')
   @UseGuards(GoogleAuthGuard)
-  googleLoginCallback(
+  googleCallback(
     @RequestUser() user: User,
-    @RequestOrigin() origin,
+    @RequestOrigin() origin: string,
     @Res() res: Response,
   ) {
     const { accessToken, refreshToken, accessOptions, refreshOptions } =
-      this.authService.googleLogIn(user.email, origin);
+      this.authService.googleLogin(user.email, origin);
 
     res.cookie('Authentication', accessToken, accessOptions);
     res.cookie('Refresh', refreshToken, refreshOptions);

@@ -32,10 +32,12 @@ export class UsersService {
     return user;
   }
 
-  async findUserBySocialId(socialId: string, registerType: RegisterType) {
-    const user = await this.userRepository.findOne({
-      where: { socialId, registerType },
+  findUserBySocialId(socialId: string, registerType: RegisterType) {
+    return this.userRepository.findOne({
+      where: {
+        socialId,
+        registerType,
+      },
     });
-    return user;
   }
 }

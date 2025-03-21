@@ -27,9 +27,11 @@ export class RegisterDto {
   @IsString()
   name: string;
 
-  @IsEnum(RegisterType)
-  registerType: RegisterType = RegisterType.COMMON;
-
+  @IsString()
   @IsOptional()
   socialId?: string;
+
+  @IsEnum(RegisterType)
+  @IsOptional()
+  registerType: RegisterType;
 }
