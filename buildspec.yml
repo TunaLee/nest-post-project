@@ -9,6 +9,11 @@ phases:
       - npm install 
       - npm install -g @nestjs/cli
 
+  pre_build:
+    commands:
+      - echo "Running database migration..."
+      - npm run migration:run 
+
   build:
     commands:
       - echo "Building NestJS application..."
