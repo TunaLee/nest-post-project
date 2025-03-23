@@ -12,7 +12,7 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: scripts/scripts/install_pm2.sh
+    - location: scripts/install_pm2.sh
       timeout: 300
 
   BeforeInstall:
