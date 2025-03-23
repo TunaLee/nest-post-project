@@ -12,7 +12,7 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: scripts/install_dependencies.sh
+    - location: scripts/scripts/install_pm2.sh
       timeout: 300
 
   BeforeInstall:

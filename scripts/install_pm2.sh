@@ -1,5 +1,5 @@
 #!/bin/bash
 
 echo "Installing dependencies..."
-cd /home/ubuntu/nestjs-app
-npm install
+cd ~/build
+npm install -g pm2
