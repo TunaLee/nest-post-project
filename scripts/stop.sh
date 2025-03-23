@@ -1,10 +1,6 @@
 #!/bin/bash
-APP_NAME="nestjs-app"
-
-echo "Stopping application: $APP_NAME"
-
-
-pm2 stop $APP_NAME
-pm2 delete $APP_NAME
-
-echo " Application stopped successfully!"
+# 기존 애플리케이션 종료
+PID=$(pgrep -f 'node /home/ec2-user/build/main.js')
+if [ -n "$PID" ]; then
+    sudo kill -9 $PID
+fi
