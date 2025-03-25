@@ -4,8 +4,6 @@ import {
   Body,
   HttpStatus,
   Res,
-  UseInterceptors,
-  UploadedFile,
   UseGuards,
   Get,
 } from '@nestjs/common';
