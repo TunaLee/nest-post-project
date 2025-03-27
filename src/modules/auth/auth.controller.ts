@@ -101,16 +101,4 @@ export class AuthController {
       message: '로그아웃 완료',
     });
   }
-
-  // @UseInterceptors(FileInterceptor('file'))
-  // @UseGuards(JwtAuthGuard)
-  // @Post('upload-profile')
-  // async uploadProfile(
-  //   @UploadedFile() file: Express.Multer.File,
-  //   @RequestUser() user: User,
-  // ) {
-  //   const result = await this.authService.uploadProfile(file);
-
-  //   return { result };
-  // }
 }
